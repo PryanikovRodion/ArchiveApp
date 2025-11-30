@@ -44,7 +44,19 @@ fun MainScreen(
 
     // Стан для панелі пошуку
     var isSearchActive by remember { mutableStateOf(false) }
+    var permissionsGranted by remember { mutableStateOf(false) }
 
+    if (!permissionsGranted) {
+        RequestPermissions(
+            onPermissionsGranted = {
+                permissionsGranted = true
+            }
+        )
+    } else {
+        // Здесь ваш основной контент, который требует разрешений
+        // Например, CameraPreview() или LocationTracker()
+        Text("Всі дозволи отримані")
+    }
     // --- 1. Логіка Діалогових Вікон (Bottom Sheets) ---
     if (mainState.currentSheet != SheetContent.NONE) {
         ModalBottomSheet(
