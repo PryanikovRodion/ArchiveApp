@@ -14,7 +14,6 @@ fun RequestPermissions(
 ) {
     val context = LocalContext.current
 
-    // Определяем список разрешений в зависимости от версии Android
     val permissionsToRequest = remember {
         mutableListOf(
             Manifest.permission.CAMERA,
@@ -26,13 +25,9 @@ fun RequestPermissions(
                 add(Manifest.permission.READ_MEDIA_IMAGES)
                 add(Manifest.permission.READ_MEDIA_VIDEO)
             } else {
-//                 Android 12 и ниже
+
                 add(Manifest.permission.READ_EXTERNAL_STORAGE)
-//                 WRITE_EXTERNAL_STORAGE обычно нужен только до Android 10,
-//                 но если очень нужно для старых версий:
-//                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-//                     add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                 }
+
             }
         }.toTypedArray()
     }
